@@ -1,16 +1,33 @@
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        
+        //TODO
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GameStart()
     {
-        
+         SceneManager.LoadScene(1);
+    }
+
+    public void GameOptions()
+    {
+        // TO DO
+    }
+
+    public void GameQuit()
+    {
+        #if UNITY_EDITOR
+            EditorApplication.ExitPlaymode();
+        #else
+            Application.Quit();
+        #endif
     }
 }
