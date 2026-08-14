@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ClawController : MonoBehaviour
+public class JoystickController : MonoBehaviour
 {
     [SerializeField] private InputAction playerMove, playerAction1;
-    [SerializeField] private float speed, rangeX, rangeZ;
+    [SerializeField] private float maxAngle;
+    
     void Awake()
     {
         playerMove = new InputAction("Movement", InputActionType.Value);
@@ -35,24 +36,16 @@ public class ClawController : MonoBehaviour
 
     void Start()
     {
-        speed = 1f;
-        rangeX = 1.2f;
-        rangeZ = 0.8f;
+        maxAngle = 20f;
     }
 
     void Update()
     {
-        float x = transform.position.x;
-        float y = transform.position.y;
-        float z = transform.position.z;
-        if(x < -rangeX) { transform.position = new Vector3(x + 0.01f, y, z); }
-        else if(x > rangeX) { transform.position = new Vector3(x - 0.01f, y, z); }
-        if(z < -rangeZ) { transform.position = new Vector3(x, y, z + 0.01f); }
-        else if (z > rangeZ) { transform.position = new Vector3(x, y, z - 0.01f); }
-
         Vector2 input = playerMove.ReadValue<Vector2>();
-        Vector3 input2 = new Vector3(0, -input.x, input.y);
-        if (input2.magnitude > 1f) { input2.Normalize(); }
-        transform.Translate(input2 * Time.deltaTime * speed);
+        float x = input.x * maxAngle;
+        float y = 90;
+        float z = input.y * maxAngle;
+        float w = transform.rotation.w;
+        transform.rotation = new Quaternion(x,y,z,w);
     }
 }
