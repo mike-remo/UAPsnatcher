@@ -5,6 +5,8 @@ public class JoystickController : MonoBehaviour
 {
     [SerializeField] private InputAction playerMove, playerAction1;
     [SerializeField] private float maxAngle;
+    [SerializeField] private GameObject button;
+    private Vector3 pushed, unpushed;
     
     void Awake()
     {
@@ -37,6 +39,12 @@ public class JoystickController : MonoBehaviour
     void Start()
     {
         maxAngle = 20f;
+        pushed = new Vector3(button.transform.localPosition.x,
+                             button.transform.localPosition.y - 0.02f,
+                             button.transform.localPosition.z);
+        unpushed = new Vector3(button.transform.localPosition.x,
+                               button.transform.localPosition.y,
+                               button.transform.localPosition.z);
     }
 
     void Update()
@@ -45,7 +53,9 @@ public class JoystickController : MonoBehaviour
         float x = input.x * maxAngle;
         float y = 90;
         float z = input.y * maxAngle;
-        float w = transform.rotation.w;
-        transform.rotation = new Quaternion(x,y,z,w);
+        transform.localEulerAngles = new Vector3(x, y, z);
+
+        if (playerAction1.IsPressed()) { button.transform.localPosition = pushed; }
+        else { button.transform.localPosition = unpushed; }
     }
 }
