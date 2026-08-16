@@ -40,7 +40,7 @@ public class JoystickController : MonoBehaviour
     {
         maxAngle = 20f;
         pushed = new Vector3(button.transform.localPosition.x,
-                             button.transform.localPosition.y - 0.02f,
+                             button.transform.localPosition.y - 0.015f,
                              button.transform.localPosition.z);
         unpushed = new Vector3(button.transform.localPosition.x,
                                button.transform.localPosition.y,
@@ -48,6 +48,11 @@ public class JoystickController : MonoBehaviour
     }
 
     void Update()
+    {
+        Controls();
+    }
+
+    void Controls()
     {
         Vector2 input = playerMove.ReadValue<Vector2>();
         float x = input.x * maxAngle;
