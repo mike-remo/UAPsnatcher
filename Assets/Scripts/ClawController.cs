@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class ClawController : MonoBehaviour
 {
-    [SerializeField] private InputAction playerMove, playerAction1;
+    [SerializeField] private InputAction playerMove, playerAction1, playerAction2;
     [SerializeField] private float speedH, speedV, speedC, rangeYmin, rangeYmax, elevation;
     [SerializeField] private float circum, length, offset, angle, openAngle, closeAngle;
     [SerializeField] private GameObject clawArm, claw1, claw2, claw3, claw4;
@@ -22,12 +22,14 @@ public class ClawController : MonoBehaviour
             .With("Right", "<Keyboard>/rightArrow");
         
         playerAction1 = new InputAction("Activate", InputActionType.Button, "<Keyboard>/space");
+        playerAction2 = new InputAction("Alternate", InputActionType.Button, "<Keyboard>/f");
     }
 
     void OnEnable()
     {
         playerMove.Enable();
         playerAction1.Enable();
+        playerAction2.Enable();
 
         clawRB = GetComponent<Rigidbody>();
     }
@@ -36,6 +38,7 @@ public class ClawController : MonoBehaviour
     {
         playerMove.Disable();
         playerAction1.Disable();
+        playerAction2.Disable();
     }
 
     void Start()
@@ -50,7 +53,7 @@ public class ClawController : MonoBehaviour
         circum = clawArm.transform.localScale.x; // ARM initial circumference
         angle = 0; // PINCERS initial angle
         openAngle = -25; // How much to open claw
-        closeAngle = 5; // How much to close claw
+        closeAngle = 10; // How much to close claw
     }
 
     void Update()
@@ -105,7 +108,7 @@ public class ClawController : MonoBehaviour
 
     void ControlsGrab() // Controls claw open and close
     {
-        if (playerAction1.IsPressed())
+        if (playerAction1.IsPressed() || playerAction2.IsPressed())
         {
             if (angle > openAngle) { angle -= Time.deltaTime * speedC; }
             claw1.transform.eulerAngles = new Vector3(0, 45, angle);
