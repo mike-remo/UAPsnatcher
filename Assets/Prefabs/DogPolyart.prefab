@@ -2369,7 +2369,8 @@ GameObject:
   - component: {fileID: 740749846964305011}
   - component: {fileID: 2608656252086267155}
   - component: {fileID: 3495476253128539067}
-  - component: {fileID: 465320922737342411}
+  - component: {fileID: 5766214334227101407}
+  - component: {fileID: 717641272919231340}
   m_Layer: 0
   m_Name: DogPolyart
   m_TagString: Untagged
@@ -2463,8 +2464,8 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.35
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!136 &465320922737342411
+  m_Center: {x: 0, y: 1.125, z: 0}
+--- !u!136 &5766214334227101407
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2483,10 +2484,33 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
-  m_Height: 0.9
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.45, z: 0}
+  m_Radius: 0.3
+  m_Height: 0.75
+  m_Direction: 0
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!136 &717641272919231340
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8723297733384085684}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Height: 0.5
+  m_Direction: 0
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1 &8772820849150588036
 GameObject:
   m_ObjectHideFlags: 0

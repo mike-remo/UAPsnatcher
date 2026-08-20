@@ -1,48 +1,22 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class ClawController : MonoBehaviour
 {
-    [SerializeField] private InputAction playerMove, playerAction1, playerAction2;
     [SerializeField] private float speedH, speedV, speedC, rangeYmin, rangeYmax, elevation;
     [SerializeField] private float circum, length, offset, angle, openAngle, closeAngle;
     [SerializeField] private GameObject clawArm, claw1, claw2, claw3, claw4;
     private Rigidbody clawRB;
+    private PlayerInputHandler playerInput; // From PlayerInputHandler.cs
+
     void Awake()
     {
-        playerMove = new InputAction("Movement", InputActionType.Value);
-        playerMove.AddCompositeBinding("2DVector")
-            .With("Up", "<Keyboard>/w")
-            .With("Up", "<Keyboard>/upArrow")
-            .With("Left", "<Keyboard>/a")
-            .With("Left", "<Keyboard>/leftArrow")
-            .With("Down", "<Keyboard>/s")
-            .With("Down", "<Keyboard>/downArrow")
-            .With("Right", "<Keyboard>/d")
-            .With("Right", "<Keyboard>/rightArrow");
-        
-        playerAction1 = new InputAction("Activate", InputActionType.Button, "<Keyboard>/space");
-        playerAction2 = new InputAction("Alternate", InputActionType.Button, "<Keyboard>/f");
-    }
-
-    void OnEnable()
-    {
-        playerMove.Enable();
-        playerAction1.Enable();
-        playerAction2.Enable();
-
-        clawRB = GetComponent<Rigidbody>();
-    }
-
-    void OnDisable()
-    {
-        playerMove.Disable();
-        playerAction1.Disable();
-        playerAction2.Disable();
+        playerInput = GameObject.Find("PlayerInputHandler").GetComponent<PlayerInputHandler>();
     }
 
     void Start()
     {
+        clawRB = GetComponent<Rigidbody>();
+
         speedH = 100f; // Horizontal movement speed
         speedV = 0.5f; // Vertical movement speed
         speedC = 180f; // Grab speed
@@ -71,16 +45,13 @@ public class ClawController : MonoBehaviour
 
     void ControlsMoveH(float x, float y, float z) // Claw horizontal movement
     {
-        // Movement from 2d input converted to 3d local space
-        Vector2 input = playerMove.ReadValue<Vector2>();
-        Vector3 input2 = new Vector3(input.x, 0, input.y);
-        input2.Normalize();
-        clawRB.linearVelocity = input2 * Time.deltaTime * speedH;
+        Vector3 input = playerInput.playerMoveInput3d;
+        clawRB.linearVelocity = input * Time.deltaTime * speedH;
     }
 
     void ControlsMoveV(float x, float z, float x2, float y2, float z2) // Claw vertical movement
     {
-        if (playerAction1.IsPressed())
+        if (playerInput.playerButton1isPressed)
         {
             if (elevation > rangeYmin) // Lower claw and extend arm
             {
@@ -108,7 +79,7 @@ public class ClawController : MonoBehaviour
 
     void ControlsGrab() // Controls claw open and close
     {
-        if (playerAction1.IsPressed() || playerAction2.IsPressed())
+        if (playerInput.playerButton1isPressed || playerInput.playerButton2isPressed)
         {
             if (angle > openAngle) { angle -= Time.deltaTime * speedC; }
             claw1.transform.eulerAngles = new Vector3(0, 45, angle);
