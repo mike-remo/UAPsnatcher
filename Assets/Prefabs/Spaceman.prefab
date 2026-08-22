@@ -579,6 +579,7 @@ GameObject:
   - component: {fileID: 3176777625225262397}
   - component: {fileID: 5827339908877161982}
   - component: {fileID: 8795796290194251816}
+  - component: {fileID: 3197086112675792318}
   m_Layer: 0
   m_Name: Spaceman
   m_TagString: Untagged
@@ -636,7 +637,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 0.1
   m_LinearDamping: 0
-  m_AngularDamping: 0.5
+  m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0.2, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -695,6 +696,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.125
   m_Center: {x: 0, y: 0.125, z: 0}
+--- !u!114 &3197086112675792318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166319221533770245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f9fb0e54e2dae47b00d7ce7a276e30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Prize
+  pointValue: 5
 --- !u!1 &3688818458166752380
 GameObject:
   m_ObjectHideFlags: 0

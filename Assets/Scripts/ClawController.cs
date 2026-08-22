@@ -7,6 +7,8 @@ public class ClawController : MonoBehaviour
     [SerializeField] private GameObject clawArm, claw1, claw2, claw3, claw4;
     private Rigidbody clawRB;
     private PlayerInputHandler playerInput; // From PlayerInputHandler.cs
+    private AudioSource clawAudioMoveH, clawAudioMoveV;
+    [SerializeField] private AudioClip clawSoundMoveH, clawSoundMoveV;
 
     void Awake()
     {
@@ -16,6 +18,8 @@ public class ClawController : MonoBehaviour
     void Start()
     {
         clawRB = GetComponent<Rigidbody>();
+        clawAudioMoveH = GameObject.Find("ClawAudioMoveH").GetComponent<AudioSource>();
+        clawAudioMoveV = GameObject.Find("ClawAudioMoveV").GetComponent<AudioSource>();
 
         speedH = 100f; // Horizontal movement speed
         speedV = 0.5f; // Vertical movement speed
@@ -47,6 +51,9 @@ public class ClawController : MonoBehaviour
     {
         Vector3 input = playerInput.playerMoveInput3d;
         clawRB.linearVelocity = input * Time.deltaTime * speedH;
+        if (input != Vector3.zero)
+            if (!clawAudioMoveH.isPlaying) 
+                clawAudioMoveH.PlayOneShot(clawSoundMoveH);
     }
 
     void ControlsMoveV(float x, float z, float x2, float y2, float z2) // Claw vertical movement
@@ -61,6 +68,8 @@ public class ClawController : MonoBehaviour
                 length += Time.deltaTime * (speedV / 2f);
                 clawArm.transform.localScale = new Vector3(circum, length, circum);
                 clawArm.transform.localPosition = new Vector3(x2, y2 + offset, z2);
+                if (!clawAudioMoveV.isPlaying) 
+                    clawAudioMoveV.PlayOneShot(clawSoundMoveV);
             }
         }
         else
@@ -73,6 +82,8 @@ public class ClawController : MonoBehaviour
                 length -= Time.deltaTime * (speedV / 2f);
                 clawArm.transform.localScale = new Vector3(circum, length, circum);
                 clawArm.transform.localPosition = new Vector3(x2, y2 - offset, z2);
+                if (!clawAudioMoveV.isPlaying) 
+                    clawAudioMoveV.PlayOneShot(clawSoundMoveV);
             }
         }
     }
