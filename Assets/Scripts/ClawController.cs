@@ -7,8 +7,8 @@ public class ClawController : MonoBehaviour
     [SerializeField] private GameObject clawArm, claw1, claw2, claw3, claw4;
     private Rigidbody clawRB;
     private PlayerInputHandler playerInput; // From PlayerInputHandler.cs
-    private AudioSource clawAudioMoveH, clawAudioMoveV;
-    [SerializeField] private AudioClip clawSoundMoveH, clawSoundMoveV;
+    private AudioSource clawAudioMoveH, clawAudioMoveV, clawAudioMoveC;
+    [SerializeField] private AudioClip clawSoundMoveH, clawSoundMoveV, clawSoundMoveC;
 
     void Awake()
     {
@@ -20,6 +20,7 @@ public class ClawController : MonoBehaviour
         clawRB = GetComponent<Rigidbody>();
         clawAudioMoveH = GameObject.Find("ClawAudioMoveH").GetComponent<AudioSource>();
         clawAudioMoveV = GameObject.Find("ClawAudioMoveV").GetComponent<AudioSource>();
+        clawAudioMoveC = GameObject.Find("ClawAudioMoveC").GetComponent<AudioSource>();
 
         speedH = 100f; // Horizontal movement speed
         speedV = 0.5f; // Vertical movement speed
@@ -60,31 +61,29 @@ public class ClawController : MonoBehaviour
     {
         if (playerInput.playerButton1isPressed)
         {
-            if (elevation > rangeYmin) // Lower claw and extend arm
-            {
-                elevation -= Time.deltaTime * speedV;
-                offset = Time.deltaTime * speedV / 2;
-                transform.localPosition = new Vector3(x, elevation, z);
-                length += Time.deltaTime * (speedV / 2f);
-                clawArm.transform.localScale = new Vector3(circum, length, circum);
-                clawArm.transform.localPosition = new Vector3(x2, y2 + offset, z2);
-                if (!clawAudioMoveV.isPlaying) 
-                    clawAudioMoveV.PlayOneShot(clawSoundMoveV);
-            }
+            if (elevation < rangeYmin) { return; }
+            // Lower claw and extend arm
+            elevation -= Time.deltaTime * speedV;
+            offset = Time.deltaTime * speedV / 2;
+            transform.localPosition = new Vector3(x, elevation, z);
+            length += Time.deltaTime * (speedV / 2f);
+            clawArm.transform.localScale = new Vector3(circum, length, circum);
+            clawArm.transform.localPosition = new Vector3(x2, y2 + offset, z2);
+            if (!clawAudioMoveV.isPlaying) 
+                clawAudioMoveV.PlayOneShot(clawSoundMoveV);
         }
         else
         {
-            if (elevation < rangeYmax) // Raise claw and retract arm
-            {
-                elevation += Time.deltaTime * speedV;
-                offset = Time.deltaTime * speedV / 2;
-                transform.localPosition = new Vector3(x, elevation, z);
-                length -= Time.deltaTime * (speedV / 2f);
-                clawArm.transform.localScale = new Vector3(circum, length, circum);
-                clawArm.transform.localPosition = new Vector3(x2, y2 - offset, z2);
-                if (!clawAudioMoveV.isPlaying) 
-                    clawAudioMoveV.PlayOneShot(clawSoundMoveV);
-            }
+            if (elevation > rangeYmax) { return; }
+            // Raise claw and retract arm
+            elevation += Time.deltaTime * speedV;
+            offset = Time.deltaTime * speedV / 2;
+            transform.localPosition = new Vector3(x, elevation, z);
+            length -= Time.deltaTime * (speedV / 2f);
+            clawArm.transform.localScale = new Vector3(circum, length, circum);
+            clawArm.transform.localPosition = new Vector3(x2, y2 - offset, z2);
+            if (!clawAudioMoveV.isPlaying) 
+                clawAudioMoveV.PlayOneShot(clawSoundMoveV);
         }
     }
 
@@ -92,19 +91,25 @@ public class ClawController : MonoBehaviour
     {
         if (playerInput.playerButton1isPressed || playerInput.playerButton2isPressed)
         {
-            if (angle > openAngle) { angle -= Time.deltaTime * speedC; }
+            if (angle < openAngle) { return; }
+            angle -= Time.deltaTime * speedC;
             claw1.transform.eulerAngles = new Vector3(0, 45, angle);
             claw2.transform.eulerAngles = new Vector3(0, 315, angle);
             claw3.transform.eulerAngles = new Vector3(0, 135, angle);
             claw4.transform.eulerAngles = new Vector3(0, 225, angle);
+            if (!clawAudioMoveC.isPlaying) 
+                clawAudioMoveC.PlayOneShot(clawSoundMoveC);
         }
         else
         {
-            if (angle < closeAngle) { angle += Time.deltaTime * speedC * 2; }
+            if (angle > closeAngle) { return; }
+            angle += Time.deltaTime * speedC * 2;
             claw1.transform.eulerAngles = new Vector3(0, 45, angle);
             claw2.transform.eulerAngles = new Vector3(0, 315, angle);
             claw3.transform.eulerAngles = new Vector3(0, 135, angle);
             claw4.transform.eulerAngles = new Vector3(0, 225, angle);
+            if (!clawAudioMoveC.isPlaying) 
+                clawAudioMoveC.PlayOneShot(clawSoundMoveC);
         }
     }
 }

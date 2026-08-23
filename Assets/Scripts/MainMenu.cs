@@ -7,10 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    void Awake()
-    {
-        //TODO
-    }
+    [SerializeField] private GameObject menuObject1, menuObject2;
 
     public void GameStart()
     {
@@ -19,7 +16,14 @@ public class MainMenu : MonoBehaviour
 
     public void GameOptions()
     {
-        // TO DO
+        menuObject1.SetActive(false);
+        menuObject2.SetActive(true);
+    }
+
+    public void GameOptionsBack()
+    {
+        menuObject2.SetActive(false);
+        menuObject1.SetActive(true);
     }
 
     public void GameQuit()
