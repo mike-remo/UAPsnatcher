@@ -1,48 +1,29 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class ClawController : MonoBehaviour
 {
-    [SerializeField] private InputAction playerMove, playerAction1, playerAction2;
-    [SerializeField] private float speedH, speedV, speedC, rangeYmin, rangeYmax, elevation;
-    [SerializeField] private float circum, length, offset, angle, openAngle, closeAngle;
-    [SerializeField] private GameObject clawArm, claw1, claw2, claw3, claw4;
+    private float speedH, speedV, speedC, rangeYmin, rangeYmax, elevation;
+    private float circum, length, offset, angle, openAngle, closeAngle;
+    [SerializeField] private GameObject clawArm;
+    [SerializeField] private GameObject[] pincers;
     private Rigidbody clawRB;
-    void Awake()
-    {
-        playerMove = new InputAction("Movement", InputActionType.Value);
-        playerMove.AddCompositeBinding("2DVector")
-            .With("Up", "<Keyboard>/w")
-            .With("Up", "<Keyboard>/upArrow")
-            .With("Left", "<Keyboard>/a")
-            .With("Left", "<Keyboard>/leftArrow")
-            .With("Down", "<Keyboard>/s")
-            .With("Down", "<Keyboard>/downArrow")
-            .With("Right", "<Keyboard>/d")
-            .With("Right", "<Keyboard>/rightArrow");
-        
-        playerAction1 = new InputAction("Activate", InputActionType.Button, "<Keyboard>/space");
-        playerAction2 = new InputAction("Alternate", InputActionType.Button, "<Keyboard>/f");
-    }
-
-    void OnEnable()
-    {
-        playerMove.Enable();
-        playerAction1.Enable();
-        playerAction2.Enable();
-
-        clawRB = GetComponent<Rigidbody>();
-    }
-
-    void OnDisable()
-    {
-        playerMove.Disable();
-        playerAction1.Disable();
-        playerAction2.Disable();
-    }
+    private PlayerInputHandler playerInput; // From PlayerInputHandler.cs
+    [SerializeField] private AudioSource clawAudioMoveH, clawAudioMoveV, clawAudioMoveC;
+    [SerializeField] private AudioClip clawSoundMoveH, clawSoundMoveV, clawSoundMoveC;
+    private OptionsManager optionsManager;
 
     void Start()
     {
+        playerInput = GameObject.Find("PlayerInputHandler").GetComponent<PlayerInputHandler>();
+        clawRB = GetComponent<Rigidbody>();
+        if (GameObject.Find("OptionsManager"))
+            if (GameObject.Find("OptionsManager").TryGetComponent<OptionsManager>(out optionsManager))
+            {
+                clawAudioMoveH.volume = optionsManager.options.volume;
+                clawAudioMoveV.volume = optionsManager.options.volume;
+                clawAudioMoveC.volume = optionsManager.options.volume;
+            }
+
         speedH = 100f; // Horizontal movement speed
         speedV = 0.5f; // Vertical movement speed
         speedC = 180f; // Grab speed
@@ -64,65 +45,81 @@ public class ClawController : MonoBehaviour
         float x2 = clawArm.transform.localPosition.x;
         float y2 = clawArm.transform.localPosition.y;
         float z2 = clawArm.transform.localPosition.z;
-        ControlsMoveH(x, y, z);
+        ControlsMoveH();
         ControlsMoveV(x, z, x2, y2, z2);
         ControlsGrab();
     }
 
-    void ControlsMoveH(float x, float y, float z) // Claw horizontal movement
+    void ControlsMoveH() // Claw horizontal movement
     {
-        // Movement from 2d input converted to 3d local space
-        Vector2 input = playerMove.ReadValue<Vector2>();
-        Vector3 input2 = new Vector3(input.x, 0, input.y);
-        input2.Normalize();
-        clawRB.linearVelocity = input2 * Time.deltaTime * speedH;
+        Vector3 input = playerInput.playerMoveInput3d;
+        clawRB.linearVelocity = input * Time.deltaTime * speedH;
+        if (input != Vector3.zero)
+            if (!clawAudioMoveH.isPlaying) 
+                clawAudioMoveH.PlayOneShot(clawSoundMoveH);
     }
 
     void ControlsMoveV(float x, float z, float x2, float y2, float z2) // Claw vertical movement
     {
-        if (playerAction1.IsPressed())
+        if (playerInput.playerButton1isPressed)
         {
-            if (elevation > rangeYmin) // Lower claw and extend arm
-            {
-                elevation -= Time.deltaTime * speedV;
-                offset = Time.deltaTime * speedV / 2;
-                transform.localPosition = new Vector3(x, elevation, z);
-                length += Time.deltaTime * (speedV / 2f);
-                clawArm.transform.localScale = new Vector3(circum, length, circum);
-                clawArm.transform.localPosition = new Vector3(x2, y2 + offset, z2);
-            }
+            if (elevation < rangeYmin) { return; }
+            // Lower claw and extend arm
+            elevation -= Time.deltaTime * speedV;
+            offset = Time.deltaTime * speedV / 2;
+            transform.localPosition = new Vector3(x, elevation, z);
+            length += Time.deltaTime * (speedV / 2f);
+            clawArm.transform.localScale = new Vector3(circum, length, circum);
+            clawArm.transform.localPosition = new Vector3(x2, y2 + offset, z2);
+            if (!clawAudioMoveV.isPlaying) 
+                clawAudioMoveV.PlayOneShot(clawSoundMoveV);
         }
         else
         {
-            if (elevation < rangeYmax) // Raise claw and retract arm
-            {
-                elevation += Time.deltaTime * speedV;
-                offset = Time.deltaTime * speedV / 2;
-                transform.localPosition = new Vector3(x, elevation, z);
-                length -= Time.deltaTime * (speedV / 2f);
-                clawArm.transform.localScale = new Vector3(circum, length, circum);
-                clawArm.transform.localPosition = new Vector3(x2, y2 - offset, z2);
-            }
+            if (elevation > rangeYmax) { return; }
+            // Raise claw and retract arm
+            elevation += Time.deltaTime * speedV;
+            offset = Time.deltaTime * speedV / 2;
+            transform.localPosition = new Vector3(x, elevation, z);
+            length -= Time.deltaTime * (speedV / 2f);
+            clawArm.transform.localScale = new Vector3(circum, length, circum);
+            clawArm.transform.localPosition = new Vector3(x2, y2 - offset, z2);
+            if (!clawAudioMoveV.isPlaying) 
+                clawAudioMoveV.PlayOneShot(clawSoundMoveV);
         }
     }
 
     void ControlsGrab() // Controls claw open and close
     {
-        if (playerAction1.IsPressed() || playerAction2.IsPressed())
+        if (playerInput.playerButton1isPressed || playerInput.playerButton2isPressed)
         {
-            if (angle > openAngle) { angle -= Time.deltaTime * speedC; }
-            claw1.transform.eulerAngles = new Vector3(0, 45, angle);
-            claw2.transform.eulerAngles = new Vector3(0, 315, angle);
-            claw3.transform.eulerAngles = new Vector3(0, 135, angle);
-            claw4.transform.eulerAngles = new Vector3(0, 225, angle);
+            if (angle < openAngle) { return; }
+            angle -= Time.deltaTime * speedC;
+            //claw1.transform.eulerAngles = new Vector3(0, 45, angle);
+            //claw2.transform.eulerAngles = new Vector3(0, 315, angle);
+            //claw3.transform.eulerAngles = new Vector3(0, 135, angle);
+            //claw4.transform.eulerAngles = new Vector3(0, 225, angle);
+            foreach (GameObject pincer in pincers)
+            {
+                pincer.transform.eulerAngles = new Vector3(0, pincer.transform.eulerAngles.y, angle);
+            }
+            if (!clawAudioMoveC.isPlaying) 
+                clawAudioMoveC.PlayOneShot(clawSoundMoveC);
         }
         else
         {
-            if (angle < closeAngle) { angle += Time.deltaTime * speedC * 2; }
-            claw1.transform.eulerAngles = new Vector3(0, 45, angle);
-            claw2.transform.eulerAngles = new Vector3(0, 315, angle);
-            claw3.transform.eulerAngles = new Vector3(0, 135, angle);
-            claw4.transform.eulerAngles = new Vector3(0, 225, angle);
+            if (angle > closeAngle) { return; }
+            angle += Time.deltaTime * speedC * 2;
+            //claw1.transform.eulerAngles = new Vector3(0, 45, angle);
+            //claw2.transform.eulerAngles = new Vector3(0, 315, angle);
+            //claw3.transform.eulerAngles = new Vector3(0, 135, angle);
+            //claw4.transform.eulerAngles = new Vector3(0, 225, angle);
+            foreach (GameObject pincer in pincers)
+            {
+                pincer.transform.eulerAngles = new Vector3(0, pincer.transform.eulerAngles.y, angle);
+            }
+            if (!clawAudioMoveC.isPlaying) 
+                clawAudioMoveC.PlayOneShot(clawSoundMoveC);
         }
     }
 }

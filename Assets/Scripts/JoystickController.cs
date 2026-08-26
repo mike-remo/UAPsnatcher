@@ -1,42 +1,14 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class JoystickController : MonoBehaviour
 {
-    [SerializeField] private InputAction playerMove, playerAction1, playerAction2;
     [SerializeField] private float maxAngle;
     [SerializeField] private GameObject button1, button2;
     private Vector3 pushed1, unpushed1, pushed2, unpushed2;
-    
+    private PlayerInputHandler playerInput; // From PlayerInputHandler.cs
     void Awake()
     {
-        playerMove = new InputAction("Movement", InputActionType.Value);
-        playerMove.AddCompositeBinding("2DVector")
-            .With("Up", "<Keyboard>/w")
-            .With("Up", "<Keyboard>/upArrow")
-            .With("Left", "<Keyboard>/a")
-            .With("Left", "<Keyboard>/leftArrow")
-            .With("Down", "<Keyboard>/s")
-            .With("Down", "<Keyboard>/downArrow")
-            .With("Right", "<Keyboard>/d")
-            .With("Right", "<Keyboard>/rightArrow");
-        
-        playerAction1 = new InputAction("Activate", InputActionType.Button, "<Keyboard>/space");
-        playerAction2 = new InputAction("Alternate", InputActionType.Button, "<Keyboard>/f");
-    }
-
-    void OnEnable()
-    {
-        playerMove.Enable();
-        playerAction1.Enable();
-        playerAction2.Enable();
-    }
-
-    void OnDisable()
-    {
-        playerMove.Disable();
-        playerAction1.Disable();
-        playerAction2.Disable();
+        playerInput = GameObject.Find("PlayerInputHandler").GetComponent<PlayerInputHandler>();
     }
 
     void Start()
@@ -64,8 +36,7 @@ public class JoystickController : MonoBehaviour
 
     void ControlsJoystick() // Mimic joystick controls
     {
-        Vector2 input = playerMove.ReadValue<Vector2>();
-        input.Normalize();
+        Vector2 input = playerInput.playerMoveInput;
         float x = input.x * maxAngle;
         float y = 90;
         float z = input.y * maxAngle;
@@ -74,9 +45,9 @@ public class JoystickController : MonoBehaviour
 
     void ControlsButtons() // Mimic button controls
     {
-        if (playerAction1.IsPressed()) { button1.transform.localPosition = pushed1; }
+        if (playerInput.playerButton1isPressed) { button1.transform.localPosition = pushed1; }
         else { button1.transform.localPosition = unpushed1; }
-        if (playerAction2.IsPressed()) { button2.transform.localPosition = pushed2; }
+        if (playerInput.playerButton2isPressed) { button2.transform.localPosition = pushed2; }
         else { button2.transform.localPosition = unpushed2; }
     }
 }

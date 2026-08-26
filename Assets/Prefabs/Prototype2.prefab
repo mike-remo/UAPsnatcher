@@ -34,6 +34,73 @@ Transform:
   - {fileID: 2492140984749941081}
   m_Father: {fileID: 5389214721543886678}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &414795604119820586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6551804345821085322}
+  - component: {fileID: 6564550957122914531}
+  - component: {fileID: 6691690374886488862}
+  m_Layer: 0
+  m_Name: PrizeDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6551804345821085322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414795604119820586}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: -0.5}
+  m_LocalScale: {x: 0.9, y: 0.1, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1211755288762190513}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6564550957122914531
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414795604119820586}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6691690374886488862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414795604119820586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571db96440f908f469c670720b44c09f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PrizeDetector
+  scoreText: {fileID: 0}
 --- !u!1 &568542810283621547
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +240,7 @@ GameObject:
   - component: {fileID: 2653640638650262538}
   - component: {fileID: 7662732306106863703}
   - component: {fileID: 4828549757680312949}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClawLeverUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +333,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -302,8 +369,8 @@ Transform:
   m_GameObject: {fileID: 840413905461946793}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.5, y: 1.1, z: -0.31}
-  m_LocalScale: {x: 0.6, y: 0.1, z: 0.025000002}
+  m_LocalPosition: {x: 0.5, y: 1.15, z: -0.545}
+  m_LocalScale: {x: 0.7, y: 0.2, z: 0.025}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3208476119264070491}
@@ -537,6 +604,7 @@ Transform:
   - {fileID: 4279260384816986733}
   - {fileID: 6528008447697433856}
   - {fileID: 3208476119264070491}
+  - {fileID: 6551804345821085322}
   - {fileID: 1890925853321763456}
   - {fileID: 4753084471577065787}
   - {fileID: 454676107738809911}
@@ -553,8 +621,7 @@ GameObject:
   - component: {fileID: 8402964466061613314}
   - component: {fileID: 4181137242537786938}
   - component: {fileID: 8971427588539871808}
-  - component: {fileID: 7390621053768863606}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClawLeverJointSE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -634,27 +701,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &7390621053768863606
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108385224432819098}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1203859430839856973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,8 +1339,8 @@ Transform:
   m_GameObject: {fileID: 2589744140120971651}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.55, z: -0.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1, y: 0.55, z: -0.6}
+  m_LocalScale: {x: 1, y: 1, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6528008447697433856}
@@ -1405,8 +1451,8 @@ Transform:
   m_GameObject: {fileID: 2718696110926775541}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.9, z: -0.8}
-  m_LocalScale: {x: 1, y: 0.3, z: 0.4}
+  m_LocalPosition: {x: 0, y: 0.9, z: -0.9}
+  m_LocalScale: {x: 1, y: 0.3, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6528008447697433856}
@@ -1501,7 +1547,7 @@ GameObject:
   - component: {fileID: 5109233114360054842}
   - component: {fileID: 8824347739854091954}
   - component: {fileID: 7185992266641060989}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClawLeverUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1594,7 +1640,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1614,7 +1660,7 @@ GameObject:
   - component: {fileID: 4048739286107874238}
   - component: {fileID: 8586574373056251810}
   - component: {fileID: 3990976291605078923}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClawLeverLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1706,7 +1752,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1742,8 +1788,8 @@ Transform:
   m_GameObject: {fileID: 3013617793636917151}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0.55, z: -0.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -1, y: 0.55, z: -0.6}
+  m_LocalScale: {x: 1, y: 1, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6528008447697433856}
@@ -1981,8 +2027,8 @@ Transform:
   m_GameObject: {fileID: 3163447800789496048}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.55, z: 0.5}
-  m_LocalScale: {x: 3, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.55, z: 0.4}
+  m_LocalScale: {x: 3, y: 1, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6528008447697433856}
@@ -2077,7 +2123,7 @@ GameObject:
   - component: {fileID: 4549753071574743360}
   - component: {fileID: 7167377122863660867}
   - component: {fileID: 8344391770415461722}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClawLeverLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2169,7 +2215,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -2336,6 +2382,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6094444604291761669}
+  - {fileID: 5496231007514840171}
   - {fileID: 287571612817004104}
   - {fileID: 3920052613105575226}
   - {fileID: 6470824497171755913}
@@ -2356,50 +2403,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7085b4d60dddd2f48971e8ca1fb15be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClawController
-  playerMove:
-    m_Name: Player Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: dff5ae33-3bde-4d05-b05e-5af48bca5f88
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  playerAction1:
-    m_Name: Player Action 1
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 568a0cbc-8e34-4749-b2c6-58bbbe90c77c
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  playerAction2:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 99772bac-638b-4f95-b574-dba2ff0e8dbb
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  speedH: 0
-  speedV: 0
-  speedC: 0
-  rangeYmin: 0
-  rangeYmax: 0
-  elevation: 0
-  circum: 0
-  length: 0
-  offset: 0
-  angle: 0
-  openAngle: 0
-  closeAngle: 0
   clawArm: {fileID: 4919172676063240639}
-  claw1: {fileID: 5217328289756379538}
-  claw2: {fileID: 8383055804530318860}
-  claw3: {fileID: 6757994192498770536}
-  claw4: {fileID: 1108385224432819098}
+  pincers:
+  - {fileID: 5217328289756379538}
+  - {fileID: 8383055804530318860}
+  - {fileID: 6757994192498770536}
+  - {fileID: 1108385224432819098}
+  clawAudioMoveH: {fileID: 1407900679669455952}
+  clawAudioMoveV: {fileID: 6601675690485052655}
+  clawAudioMoveC: {fileID: 3368417809164480085}
+  clawSoundMoveH: {fileID: 8300000, guid: 867040d0bd6c68941a4f842e475cd1c6, type: 3}
+  clawSoundMoveV: {fileID: 8300000, guid: 3727361ffa3352249817de561515eb3f, type: 3}
+  clawSoundMoveC: {fileID: 8300000, guid: 822ee54dadcdb1143878f4a7d3bc2a83, type: 3}
 --- !u!54 &455777824301593234
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2567,8 +2582,8 @@ Transform:
   m_GameObject: {fileID: 4366558475407593785}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1, z: -0.6}
-  m_LocalScale: {x: 0.98, y: 0.1, z: 0.025}
+  m_LocalPosition: {x: 0, y: 1.15, z: -0.885}
+  m_LocalScale: {x: 0.98, y: 0.2, z: 0.025}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3208476119264070491}
@@ -2867,7 +2882,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7fe17c72a7c3dfc48909372a871554f6, type: 2}
+  - {fileID: 2100000, guid: a57c85c667feacb46aa9ed1ad3d32194, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3067,8 +3082,8 @@ Transform:
   m_GameObject: {fileID: 4907648374820440570}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.5, y: 1.1, z: -0.31}
-  m_LocalScale: {x: 0.6, y: 0.1, z: 0.025000002}
+  m_LocalPosition: {x: -0.5, y: 1.15, z: -0.545}
+  m_LocalScale: {x: 0.7, y: 0.2, z: 0.025000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3208476119264070491}
@@ -3162,7 +3177,6 @@ GameObject:
   - component: {fileID: 3920052613105575226}
   - component: {fileID: 8617463959773558212}
   - component: {fileID: 7779473350644978618}
-  - component: {fileID: 5231699604840546640}
   m_Layer: 0
   m_Name: ClawArm
   m_TagString: Untagged
@@ -3242,29 +3256,169 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5231699604840546640
-CapsuleCollider:
+--- !u!1 &4923511681401530331
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4919172676063240639}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8847974938463194849}
+  - component: {fileID: 3368417809164480085}
+  m_Layer: 0
+  m_Name: ClawAudioMoveC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8847974938463194849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4923511681401530331}
   serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5496231007514840171}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &3368417809164480085
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4923511681401530331}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1 &5051065997824881268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5496231007514840171}
+  m_Layer: 0
+  m_Name: ClawAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5496231007514840171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5051065997824881268}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4281557397099324264}
+  - {fileID: 2472237707774882312}
+  - {fileID: 8847974938463194849}
+  m_Father: {fileID: 510904755911447721}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5171688143953862898
 GameObject:
   m_ObjectHideFlags: 0
@@ -3388,8 +3542,7 @@ GameObject:
   - component: {fileID: 6470824497171755913}
   - component: {fileID: 5773816520127946487}
   - component: {fileID: 438007238040709939}
-  - component: {fileID: 9060685284922087844}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClawLeverJointNW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3469,27 +3622,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &9060685284922087844
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5217328289756379538}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5349754879750988299
 GameObject:
   m_ObjectHideFlags: 0
@@ -3518,8 +3650,8 @@ Transform:
   m_GameObject: {fileID: 5349754879750988299}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1, z: -0.02}
-  m_LocalScale: {x: 0.98, y: 0.1, z: 0.025}
+  m_LocalPosition: {x: 0, y: 1.15, z: -0.21}
+  m_LocalScale: {x: 0.98, y: 0.2, z: 0.025}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3208476119264070491}
@@ -4054,7 +4186,7 @@ GameObject:
   - component: {fileID: 109593311813840613}
   - component: {fileID: 3718751370633083921}
   - component: {fileID: 2156865059849021190}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClawLeverLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4146,7 +4278,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -4295,7 +4427,7 @@ Transform:
   m_GameObject: {fileID: 6468745396736953511}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.35, y: 1.7600001, z: -1.2}
+  m_LocalPosition: {x: -0.35, y: 1.75, z: -1.2}
   m_LocalScale: {x: 0.125, y: 0.125, z: 0.125}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -4393,33 +4525,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7847c9d7e701a74f9b72035de818e0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JoystickController
-  playerMove:
-    m_Name: Player Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 31feac41-487c-4637-be0a-c9c90999ad05
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  playerAction1:
-    m_Name: Player Action 1
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 396337ef-97e3-46da-9cb8-32cfb85870e7
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  playerAction2:
-    m_Name: 
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: ee88d5aa-771b-41e2-837e-dc70b5d37f1a
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
   maxAngle: 0
   button1: {fileID: 0}
   button2: {fileID: 0}
@@ -4435,7 +4540,7 @@ GameObject:
   - component: {fileID: 5686842904527159336}
   - component: {fileID: 2458935070074598687}
   - component: {fileID: 160025130011254253}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClawLeverUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4528,7 +4633,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -4564,7 +4669,7 @@ Transform:
   m_GameObject: {fileID: 6514150168027983676}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 0.94500005, z: -0.2}
+  m_LocalPosition: {x: 0, y: 0.945, z: -0.4}
   m_LocalScale: {x: 0.99, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4660,8 +4765,7 @@ GameObject:
   - component: {fileID: 7137550039900639006}
   - component: {fileID: 8230427633743155198}
   - component: {fileID: 868542125931475542}
-  - component: {fileID: 630958958888295693}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClawLeverJointNE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4741,27 +4845,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &630958958888295693
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6757994192498770536}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6902386426024268461
 GameObject:
   m_ObjectHideFlags: 0
@@ -5062,7 +5145,7 @@ GameObject:
   - component: {fileID: 2177969667819838176}
   - component: {fileID: 4816975382382733293}
   - component: {fileID: 7912152392046323437}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClawLeverUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5155,7 +5238,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -5529,8 +5612,8 @@ Transform:
   m_GameObject: {fileID: 8306146013537163882}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.6649998, z: -1.175}
-  m_LocalScale: {x: 1, y: 0.25, z: 0.35}
+  m_LocalPosition: {x: -0.25, y: 1.6649998, z: -1.175}
+  m_LocalScale: {x: 0.5, y: 0.25, z: 0.35}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1211755288762190513}
@@ -5624,8 +5707,7 @@ GameObject:
   - component: {fileID: 3562882013751227498}
   - component: {fileID: 5086143275108664508}
   - component: {fileID: 5432800449032664155}
-  - component: {fileID: 1022796497034013536}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClawLeverJointSW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5705,27 +5787,264 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1022796497034013536
-SphereCollider:
+--- !u!1 &8515499945665593452
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8383055804530318860}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2472237707774882312}
+  - component: {fileID: 6601675690485052655}
+  m_Layer: 0
+  m_Name: ClawAudioMoveV
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2472237707774882312
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8515499945665593452}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5496231007514840171}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &6601675690485052655
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8515499945665593452}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1 &8655375661952803334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4281557397099324264}
+  - component: {fileID: 1407900679669455952}
+  m_Layer: 0
+  m_Name: ClawAudioMoveH
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4281557397099324264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8655375661952803334}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5496231007514840171}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1407900679669455952
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8655375661952803334}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8700523195966647063
 GameObject:
   m_ObjectHideFlags: 0
@@ -5888,7 +6207,7 @@ GameObject:
   - component: {fileID: 2223670855162787371}
   - component: {fileID: 3027890565518103170}
   - component: {fileID: 3914245592123602415}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClawLeverLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5980,7 +6299,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
