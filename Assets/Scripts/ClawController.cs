@@ -2,25 +2,27 @@ using UnityEngine;
 
 public class ClawController : MonoBehaviour
 {
-    [SerializeField] private float speedH, speedV, speedC, rangeYmin, rangeYmax, elevation;
-    [SerializeField] private float circum, length, offset, angle, openAngle, closeAngle;
-    [SerializeField] private GameObject clawArm, claw1, claw2, claw3, claw4;
+    private float speedH, speedV, speedC, rangeYmin, rangeYmax, elevation;
+    private float circum, length, offset, angle, openAngle, closeAngle;
+    [SerializeField] private GameObject clawArm;
+    [SerializeField] private GameObject[] pincers;
     private Rigidbody clawRB;
     private PlayerInputHandler playerInput; // From PlayerInputHandler.cs
-    private AudioSource clawAudioMoveH, clawAudioMoveV, clawAudioMoveC;
+    [SerializeField] private AudioSource clawAudioMoveH, clawAudioMoveV, clawAudioMoveC;
     [SerializeField] private AudioClip clawSoundMoveH, clawSoundMoveV, clawSoundMoveC;
-
-    void Awake()
-    {
-        playerInput = GameObject.Find("PlayerInputHandler").GetComponent<PlayerInputHandler>();
-    }
+    private OptionsManager optionsManager;
 
     void Start()
     {
+        playerInput = GameObject.Find("PlayerInputHandler").GetComponent<PlayerInputHandler>();
         clawRB = GetComponent<Rigidbody>();
-        clawAudioMoveH = GameObject.Find("ClawAudioMoveH").GetComponent<AudioSource>();
-        clawAudioMoveV = GameObject.Find("ClawAudioMoveV").GetComponent<AudioSource>();
-        clawAudioMoveC = GameObject.Find("ClawAudioMoveC").GetComponent<AudioSource>();
+        if (GameObject.Find("OptionsManager"))
+            if (GameObject.Find("OptionsManager").TryGetComponent<OptionsManager>(out optionsManager))
+            {
+                clawAudioMoveH.volume = optionsManager.options.volume;
+                clawAudioMoveV.volume = optionsManager.options.volume;
+                clawAudioMoveC.volume = optionsManager.options.volume;
+            }
 
         speedH = 100f; // Horizontal movement speed
         speedV = 0.5f; // Vertical movement speed
@@ -43,12 +45,12 @@ public class ClawController : MonoBehaviour
         float x2 = clawArm.transform.localPosition.x;
         float y2 = clawArm.transform.localPosition.y;
         float z2 = clawArm.transform.localPosition.z;
-        ControlsMoveH(x, y, z);
+        ControlsMoveH();
         ControlsMoveV(x, z, x2, y2, z2);
         ControlsGrab();
     }
 
-    void ControlsMoveH(float x, float y, float z) // Claw horizontal movement
+    void ControlsMoveH() // Claw horizontal movement
     {
         Vector3 input = playerInput.playerMoveInput3d;
         clawRB.linearVelocity = input * Time.deltaTime * speedH;
@@ -93,10 +95,14 @@ public class ClawController : MonoBehaviour
         {
             if (angle < openAngle) { return; }
             angle -= Time.deltaTime * speedC;
-            claw1.transform.eulerAngles = new Vector3(0, 45, angle);
-            claw2.transform.eulerAngles = new Vector3(0, 315, angle);
-            claw3.transform.eulerAngles = new Vector3(0, 135, angle);
-            claw4.transform.eulerAngles = new Vector3(0, 225, angle);
+            //claw1.transform.eulerAngles = new Vector3(0, 45, angle);
+            //claw2.transform.eulerAngles = new Vector3(0, 315, angle);
+            //claw3.transform.eulerAngles = new Vector3(0, 135, angle);
+            //claw4.transform.eulerAngles = new Vector3(0, 225, angle);
+            foreach (GameObject pincer in pincers)
+            {
+                pincer.transform.eulerAngles = new Vector3(0, pincer.transform.eulerAngles.y, angle);
+            }
             if (!clawAudioMoveC.isPlaying) 
                 clawAudioMoveC.PlayOneShot(clawSoundMoveC);
         }
@@ -104,10 +110,14 @@ public class ClawController : MonoBehaviour
         {
             if (angle > closeAngle) { return; }
             angle += Time.deltaTime * speedC * 2;
-            claw1.transform.eulerAngles = new Vector3(0, 45, angle);
-            claw2.transform.eulerAngles = new Vector3(0, 315, angle);
-            claw3.transform.eulerAngles = new Vector3(0, 135, angle);
-            claw4.transform.eulerAngles = new Vector3(0, 225, angle);
+            //claw1.transform.eulerAngles = new Vector3(0, 45, angle);
+            //claw2.transform.eulerAngles = new Vector3(0, 315, angle);
+            //claw3.transform.eulerAngles = new Vector3(0, 135, angle);
+            //claw4.transform.eulerAngles = new Vector3(0, 225, angle);
+            foreach (GameObject pincer in pincers)
+            {
+                pincer.transform.eulerAngles = new Vector3(0, pincer.transform.eulerAngles.y, angle);
+            }
             if (!clawAudioMoveC.isPlaying) 
                 clawAudioMoveC.PlayOneShot(clawSoundMoveC);
         }

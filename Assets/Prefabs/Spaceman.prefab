@@ -577,6 +577,7 @@ GameObject:
   - component: {fileID: 3391167834342148348}
   - component: {fileID: 4059828432178071127}
   - component: {fileID: 3176777625225262397}
+  - component: {fileID: 3004005503257524080}
   - component: {fileID: 5827339908877161982}
   - component: {fileID: 8795796290194251816}
   - component: {fileID: 3197086112675792318}
@@ -597,7 +598,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: -0.19421, y: -3.507, z: 3.362}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3591829574922630487}
@@ -637,7 +638,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 0.1
   m_LinearDamping: 0
-  m_AngularDamping: 1
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0.2, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -654,8 +655,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &5827339908877161982
-SphereCollider:
+--- !u!64 &3004005503257524080
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -667,13 +668,35 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
+    m_Bits: 64
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!135 &5827339908877161982
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166319221533770245}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.09
+  m_Radius: 0.07
   m_Center: {x: 0, y: 0.325, z: 0}
 --- !u!135 &8795796290194251816
 SphereCollider:
@@ -685,7 +708,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -694,8 +717,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.125
-  m_Center: {x: 0, y: 0.125, z: 0}
+  m_Radius: 0.08
+  m_Center: {x: 0, y: 0.15, z: 0}
 --- !u!114 &3197086112675792318
 MonoBehaviour:
   m_ObjectHideFlags: 0

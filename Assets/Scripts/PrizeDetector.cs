@@ -14,7 +14,7 @@ public class PrizeDetector : MonoBehaviour
 
     void OnTriggerEnter(Collider collided)
     {
-        Debug.Log("Prize won!");
+        //Debug.Log("Prize won!");
         if (collided.gameObject.TryGetComponent<Prize>(out Prize prize))
         {
             scoreValue += prize.pointValue;
