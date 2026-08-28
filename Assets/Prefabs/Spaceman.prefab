@@ -598,7 +598,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: -0.19421, y: -3.507, z: 3.362}
-  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3591829574922630487}
@@ -674,9 +674,9 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 4300020, guid: afb6ef035e041ee47bcf60f70f5f1adc, type: 3}
 --- !u!135 &5827339908877161982
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -696,7 +696,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.065
   m_Center: {x: 0, y: 0.325, z: 0}
 --- !u!135 &8795796290194251816
 SphereCollider:
@@ -717,7 +717,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.08
+  m_Radius: 0.075
   m_Center: {x: 0, y: 0.15, z: 0}
 --- !u!114 &3197086112675792318
 MonoBehaviour:

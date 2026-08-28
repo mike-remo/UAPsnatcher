@@ -32,9 +32,9 @@ public class ClawController : MonoBehaviour
         elevation = rangeYmax; // Initial height
         length = clawArm.transform.localScale.y; // ARM initial length
         circum = clawArm.transform.localScale.x; // ARM initial circumference
-        angle = 0; // PINCERS initial angle
+        angle = -5; // PINCERS initial angle
         openAngle = -25; // How much to open claw
-        closeAngle = 10; // How much to close claw
+        closeAngle = 7.5f; // How much to close claw
     }
 
     void Update()
