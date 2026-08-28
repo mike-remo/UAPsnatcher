@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class OptionsManager : MonoBehaviour
 {
@@ -30,6 +29,7 @@ public class OptionsManager : MonoBehaviour
         string loadPath = dataFilepath + dataFilename;
         if (System.IO.File.Exists(loadPath))
         {
+            Debug.Log("Loading Data from: " + dataFilepath + dataFilename);
             string dataJson = System.IO.File.ReadAllText(loadPath);
             OptionsData loadOptions = JsonUtility.FromJson<OptionsData>(dataJson);
             options.volume = loadOptions.volume;
@@ -58,3 +58,4 @@ public class OptionsManager : MonoBehaviour
             audio.volume = options.volume;
     }
 }
+// END
