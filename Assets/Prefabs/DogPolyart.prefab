@@ -2522,7 +2522,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2546,6 +2546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Prize
   pointValue: 5
+  won: 0
 --- !u!1 &8772820849150588036
 GameObject:
   m_ObjectHideFlags: 0

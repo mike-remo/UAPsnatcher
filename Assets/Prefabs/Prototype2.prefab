@@ -62,8 +62,8 @@ Transform:
   m_GameObject: {fileID: 414795604119820586}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: -0.5}
-  m_LocalScale: {x: 0.9, y: 0.1, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1.5, z: -0.525}
+  m_LocalScale: {x: 0.8, y: 0.1, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1211755288762190513}
@@ -473,7 +473,7 @@ Transform:
   m_GameObject: {fileID: 840413905461946793}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.5, y: 1.15, z: -0.545}
+  m_LocalPosition: {x: 0.4, y: 1.15, z: -0.545}
   m_LocalScale: {x: 0.7, y: 0.2, z: 0.025}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1443,8 +1443,8 @@ Transform:
   m_GameObject: {fileID: 2589744140120971651}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.55, z: -0.6}
-  m_LocalScale: {x: 1, y: 1, z: 0.8}
+  m_LocalPosition: {x: 0.95, y: 0.55, z: -0.6}
+  m_LocalScale: {x: 1.1, y: 1, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6528008447697433856}
@@ -1892,8 +1892,8 @@ Transform:
   m_GameObject: {fileID: 3013617793636917151}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0.55, z: -0.6}
-  m_LocalScale: {x: 1, y: 1, z: 0.8}
+  m_LocalPosition: {x: -0.95, y: 0.55, z: -0.6}
+  m_LocalScale: {x: 1.1, y: 1, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6528008447697433856}
@@ -2507,18 +2507,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7085b4d60dddd2f48971e8ca1fb15be0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClawController
+  pH:
+    speed: 0
+    audioMove: {fileID: 1407900679669455952}
+    soundMove: {fileID: 8300000, guid: 867040d0bd6c68941a4f842e475cd1c6, type: 3}
+  pV:
+    speed: 0
+    audioMove: {fileID: 6601675690485052655}
+    soundMove: {fileID: 8300000, guid: 3727361ffa3352249817de561515eb3f, type: 3}
+  pC:
+    speed: 0
+    audioMove: {fileID: 3368417809164480085}
+    soundMove: {fileID: 8300000, guid: 822ee54dadcdb1143878f4a7d3bc2a83, type: 3}
+    diameter: 0
+    length: 0
+    offset: 0
+    angle: 0
+    openAngle: 0
+    closeAngle: 0
   arm: {fileID: 4919172676063240639}
   pincers:
   - {fileID: 5217328289756379538}
   - {fileID: 8383055804530318860}
   - {fileID: 6757994192498770536}
   - {fileID: 1108385224432819098}
-  audioMoveH: {fileID: 1407900679669455952}
-  audioMoveV: {fileID: 6601675690485052655}
-  audioMoveC: {fileID: 3368417809164480085}
-  soundMoveH: {fileID: 8300000, guid: 867040d0bd6c68941a4f842e475cd1c6, type: 3}
-  soundMoveV: {fileID: 8300000, guid: 3727361ffa3352249817de561515eb3f, type: 3}
-  soundMoveC: {fileID: 8300000, guid: 822ee54dadcdb1143878f4a7d3bc2a83, type: 3}
 --- !u!54 &455777824301593234
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2687,7 +2699,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.15, z: -0.885}
-  m_LocalScale: {x: 0.98, y: 0.2, z: 0.025}
+  m_LocalScale: {x: 0.8, y: 0.2, z: 0.025}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3208476119264070491}
@@ -3186,7 +3198,7 @@ Transform:
   m_GameObject: {fileID: 4907648374820440570}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.5, y: 1.15, z: -0.545}
+  m_LocalPosition: {x: -0.4, y: 1.15, z: -0.545}
   m_LocalScale: {x: 0.7, y: 0.2, z: 0.025000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3755,7 +3767,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.15, z: -0.21}
-  m_LocalScale: {x: 0.98, y: 0.2, z: 0.025}
+  m_LocalScale: {x: 0.8, y: 0.2, z: 0.025}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3208476119264070491}
@@ -4774,7 +4786,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
   m_LocalPosition: {x: 0, y: 0.945, z: -0.4}
-  m_LocalScale: {x: 0.99, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1211755288762190513}
