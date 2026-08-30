@@ -50,5 +50,4 @@ public class JoystickController : MonoBehaviour
         if (playerInput.playerButton2isPressed) { button2.transform.localPosition = pushed2; }
         else { button2.transform.localPosition = unpushed2; }
     }
-}
-// END
+} // END

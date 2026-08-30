@@ -46,5 +46,4 @@ public class PrizeDetector : MonoBehaviour
                 audio.PlayOneShot(prizeSound);
         }
     }
-}
-// END
+} // END

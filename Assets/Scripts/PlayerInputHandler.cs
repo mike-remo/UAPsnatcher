@@ -52,5 +52,4 @@ public class PlayerInputHandler : MonoBehaviour
         playerButton1isPressed = playerAction1.IsPressed();
         playerButton2isPressed = playerAction2.IsPressed();
     }
-}
-// END
+} // END

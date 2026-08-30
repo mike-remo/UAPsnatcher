@@ -8,11 +8,10 @@ public class ClawController : MonoBehaviour
         public AudioSource audioMove;
         public AudioClip soundMove;
     }
-
+    // INHERITANCE EXAMPLE (Child class inherits from parent and extends it)
     [System.Serializable] private class PropertiesClaw : Properties
     {
-        public float diameter, length, offset;
-        public float angle, openAngle, closeAngle;
+        public float diameter, length, offset, angle, openAngle, closeAngle;
     }
 
     [SerializeField] private Properties pH, pV;
@@ -30,14 +29,15 @@ public class ClawController : MonoBehaviour
         pV.speed = 0.5f; // Vertical movement speed
         pC.speed = 180f; // Grab speed
         pC.length = arm.transform.localScale.y; // ARM initial length
-        pC.diameter = arm.transform.localScale.x; // ARM initial circumference
-        pC.angle = -5; // PINCERS initial angle
+        pC.diameter = arm.transform.localScale.x; // ARM diameter
         pC.openAngle = -25; // How much to open PINCERS
         pC.closeAngle = 7.5f; // How much to close PINCERS
+        pC.angle = pC.closeAngle; // PINCERS initial angle
         rangeYmax = transform.localPosition.y; // Highest pos
         rangeYmin = transform.localPosition.y - 0.95f; // Lowest pos
         elevation = rangeYmax; // Initial height
     }
+
     void Move(Vector3 input) // Claw horizontal movement
     {
         Rb.linearVelocity = input * Time.deltaTime * pH.speed;
@@ -45,8 +45,8 @@ public class ClawController : MonoBehaviour
             if (!pH.audioMove.isPlaying) 
                 pH.audioMove.PlayOneShot(pH.soundMove);
     }
-
-    void Move(bool down, float x, float z, float xArm, float yArm, float zArm) // Claw vertical movement
+    //POLYMORPHISM EXAMPLE (Method overloading)
+    void Move(bool down, float x, float z, Vector3 armPos) // Claw vertical movement
     {
         if (down)
         {
@@ -54,10 +54,10 @@ public class ClawController : MonoBehaviour
             // Lower claw and extend arm
             elevation -= Time.deltaTime * pV.speed;
             pC.offset = Time.deltaTime * pV.speed / 2;
+            pC.length += Time.deltaTime * (pV.speed / 2);
             transform.localPosition = new Vector3(x, elevation, z);
-            pC.length += Time.deltaTime * (pV.speed / 2f);
             arm.transform.localScale = new Vector3(pC.diameter, pC.length, pC.diameter);
-            arm.transform.localPosition = new Vector3(xArm, yArm + pC.offset, zArm);
+            arm.transform.localPosition = new Vector3(armPos.x, armPos.y + pC.offset, armPos.z);
             if (!pV.audioMove.isPlaying) 
                 pV.audioMove.PlayOneShot(pV.soundMove);
         }
@@ -67,15 +67,15 @@ public class ClawController : MonoBehaviour
             // Raise claw and retract arm
             elevation += Time.deltaTime * pV.speed;
             pC.offset = Time.deltaTime * pV.speed / 2;
+            pC.length -= Time.deltaTime * (pV.speed / 2);
             transform.localPosition = new Vector3(x, elevation, z);
-            pC.length -= Time.deltaTime * (pV.speed / 2f);
             arm.transform.localScale = new Vector3(pC.diameter, pC.length, pC.diameter);
-            arm.transform.localPosition = new Vector3(xArm, yArm - pC.offset, zArm);
+            arm.transform.localPosition = new Vector3(armPos.x, armPos.y - pC.offset, armPos.z);
             if (!pV.audioMove.isPlaying) 
                 pV.audioMove.PlayOneShot(pV.soundMove);
         }
     }
-
+    // ABSTRACTION EXAMPLE (Separate move claw code from out of update)
     void Grab(bool open)
     {
         if (open)
@@ -117,25 +117,21 @@ public class ClawController : MonoBehaviour
     }
 
     void Update()
-    {
+    {   // ABSTRACTION EXAMPLE (Raw input handled in another class)
         Move(playerInput.playerMoveInput3d);
         if (playerInput.playerButton1isPressed)
         {
             Move(true,
                 transform.localPosition.x,
                 transform.localPosition.z,
-                arm.transform.localPosition.x,
-                arm.transform.localPosition.y,
-                arm.transform.localPosition.z);
+                arm.transform.localPosition);
         }
         else
         {
             Move(false,
                 transform.localPosition.x,
                 transform.localPosition.z,
-                arm.transform.localPosition.x,
-                arm.transform.localPosition.y,
-                arm.transform.localPosition.z);
+                arm.transform.localPosition);
         }
         if (playerInput.playerButton1isPressed ||
             playerInput.playerButton2isPressed)
@@ -143,5 +139,4 @@ public class ClawController : MonoBehaviour
         else
             Grab(false);
     }
-}
-// END
+} // END

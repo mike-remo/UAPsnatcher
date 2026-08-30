@@ -43,7 +43,7 @@ public class OptionsManager : MonoBehaviour
 
     void Awake()
     {
-        if (optionsManager != null)
+        if (optionsManager != null) // Keep only one instance at any time
         {
             Destroy(gameObject);
             return;
@@ -57,5 +57,4 @@ public class OptionsManager : MonoBehaviour
         if (GameObject.Find("MenuAudio").TryGetComponent<AudioSource>(out audio))
             audio.volume = options.volume;
     }
-}
-// END
+} // END

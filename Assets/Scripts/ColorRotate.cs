@@ -30,5 +30,4 @@ public class ColorRotate : MonoBehaviour
             timer = 0;
         }
     }
-}
-// END
+} // END

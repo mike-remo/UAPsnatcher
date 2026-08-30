@@ -7,5 +7,4 @@ public class InGameMenu : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-}
-// END
+} // END
