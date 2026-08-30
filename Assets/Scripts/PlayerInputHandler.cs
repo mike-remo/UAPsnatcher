@@ -3,15 +3,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    private InputAction playerMove, playerAction1, playerAction2;
-    public Vector2 playerMoveInput;
-    public Vector3 playerMoveInput3d;
-    public bool playerButton1isPressed, playerButton2isPressed;
+    private InputAction actionMove, action1, action2;
+    public Vector2 moveInput;
+    public Vector3 moveInput3d;
+    public bool button1isPressed, button2isPressed;
     void Awake()
-    {
-        // In code defined player input bindings
-        playerMove = new InputAction("Movement", InputActionType.Value);
-        playerMove.AddCompositeBinding("2DVector")
+    {   // In code defined player input bindings
+        actionMove = new InputAction("Movement", InputActionType.Value);
+        actionMove.AddCompositeBinding("2DVector")
             .With("Up", "<Keyboard>/w")
             .With("Up", "<Keyboard>/upArrow")
             .With("Left", "<Keyboard>/a")
@@ -21,36 +20,33 @@ public class PlayerInputHandler : MonoBehaviour
             .With("Right", "<Keyboard>/d")
             .With("Right", "<Keyboard>/rightArrow");
         
-        playerAction1 = new InputAction("Activate", InputActionType.Button, "<Keyboard>/space");
-        playerAction1.AddBinding("<Keyboard>/numpad0");
-        playerAction2 = new InputAction("Alternate", InputActionType.Button, "<Keyboard>/f");
-        playerAction2.AddBinding("<Keyboard>/numpadPeriod");
+        action1 = new InputAction("Activate", InputActionType.Button, "<Keyboard>/space");
+        action1.AddBinding("<Keyboard>/numpad0");
+        action2 = new InputAction("Alternate", InputActionType.Button, "<Keyboard>/f");
+        action2.AddBinding("<Keyboard>/numpadPeriod");
     }
 
     void OnEnable()
     {
-        playerMove.Enable();
-        playerAction1.Enable();
-        playerAction2.Enable();
+        actionMove.Enable();
+        action1.Enable();
+        action2.Enable();
     }
 
     void OnDisable()
     {
-        playerMove.Disable();
-        playerAction1.Disable();
-        playerAction2.Disable();
+        actionMove.Disable();
+        action1.Disable();
+        action2.Disable();
     }
 
     void Update()
-    {
-        // Receive direct 2d input
-        playerMoveInput = playerMove.ReadValue<Vector2>();
-        playerMoveInput.Normalize();
+    {   // Receive direct 2d input
+        moveInput = actionMove.ReadValue<Vector2>();
+        moveInput.Normalize();
         // 2d input converted to 3d
-        playerMoveInput3d = new Vector3(playerMoveInput.x, 0, playerMoveInput.y);
-
-        playerButton1isPressed = playerAction1.IsPressed();
-        playerButton2isPressed = playerAction2.IsPressed();
+        moveInput3d = new Vector3(moveInput.x, 0, moveInput.y);
+        button1isPressed = action1.IsPressed();
+        button2isPressed = action2.IsPressed();
     }
-}
-// END
+} // END
