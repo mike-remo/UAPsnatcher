@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject menuObject1, menuObject2;
     [SerializeField] private TextMeshProUGUI videoText;
     private bool inOptions = false;
-    private float pollTimer = 0, pollNext = 3;
+    private float pollTimer = 0, pollNext = 2;
     private OptionsManager optMan;
     private bool wasChanged = false;
     private AudioSource audio;
