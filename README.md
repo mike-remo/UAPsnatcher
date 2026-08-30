@@ -14,5 +14,9 @@ Source: https://learn.unity.com/pathway/junior-programmer/unit/apply-object-orie
 
 Game details: Enjoy unlimited play time and snatch ALL of the prizes!
 
+Controls:
+- WASD or Arrow keys to move claw horizontally.
+- SPACE or NumPad0 to descend and grab.
+- F or NumPadPeriod to release grabbed item.
 
 ![Game Screenshot](https://github.com/mike-remo/UAPsnatcher/blob/main/Screenshots/GameScreen1.png)
