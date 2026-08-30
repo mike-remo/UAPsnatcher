@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class ClawController : MonoBehaviour
@@ -11,7 +12,13 @@ public class ClawController : MonoBehaviour
     // INHERITANCE EXAMPLE (Child class inherits from parent and extends it)
     [System.Serializable] private class PropertiesClaw : Properties
     {
-        public float diameter, length, offset, angle, openAngle, closeAngle;
+        public float diameter, length, offset, openAngle, closeAngle;
+        private float angle;
+        public float Angle
+        {   // ENCAPSULATION EXAMPLE (Limit the angle value and prevent direct access to it)
+            get { return angle; }
+            set { angle = math.clamp(value, openAngle, closeAngle); }
+        }
     }
 
     [SerializeField] private Properties pH, pV;
@@ -21,7 +28,7 @@ public class ClawController : MonoBehaviour
     private float rangeYmin, rangeYmax, elevation;
     private Rigidbody Rb;
     private PlayerInputHandler playerInput; // Gets input from PlayerInputHandler.cs
-    private OptionsManager optionsManager; // Persistent settings from OptionsManager.cs
+    private OptionsManager optMan; // Persistent settings from OptionsManager.cs
 
     void InitValues()
     {
@@ -30,11 +37,11 @@ public class ClawController : MonoBehaviour
         pC.speed = 180f; // Grab speed
         pC.length = arm.transform.localScale.y; // ARM initial length
         pC.diameter = arm.transform.localScale.x; // ARM diameter
-        pC.openAngle = -25; // How much to open PINCERS
+        pC.openAngle = -25f; // How much to open PINCERS
         pC.closeAngle = 7.5f; // How much to close PINCERS
-        pC.angle = pC.closeAngle; // PINCERS initial angle
+        pC.Angle = pC.closeAngle; // PINCERS initial angle
         rangeYmax = transform.localPosition.y; // Highest pos
-        rangeYmin = transform.localPosition.y - 0.95f; // Lowest pos
+        rangeYmin = transform.localPosition.y - 0.925f; // Lowest pos
         elevation = rangeYmax; // Initial height
     }
 
@@ -50,7 +57,7 @@ public class ClawController : MonoBehaviour
     {
         if (down)
         {
-            if (elevation < rangeYmin) { return; }
+            if (elevation <= rangeYmin) return;
             // Lower claw and extend arm
             elevation -= Time.deltaTime * pV.speed;
             pC.offset = Time.deltaTime * pV.speed / 2;
@@ -63,7 +70,7 @@ public class ClawController : MonoBehaviour
         }
         else
         {
-            if (elevation > rangeYmax) { return; }
+            if (elevation >= rangeYmax) return;
             // Raise claw and retract arm
             elevation += Time.deltaTime * pV.speed;
             pC.offset = Time.deltaTime * pV.speed / 2;
@@ -80,23 +87,23 @@ public class ClawController : MonoBehaviour
     {
         if (open)
         {
-            if (pC.angle < pC.openAngle) { return; }
+            if (pC.Angle <= pC.openAngle) return;
             // Open pincers
-            pC.angle -= Time.deltaTime * pC.speed;
+            pC.Angle -= Time.deltaTime * pC.speed;
             foreach (GameObject pincer in pincers)
                 pincer.transform.eulerAngles = new Vector3(0,
-                    pincer.transform.eulerAngles.y, pC.angle);
+                    pincer.transform.eulerAngles.y, pC.Angle);
             if (!pC.audioMove.isPlaying) 
                 pC.audioMove.PlayOneShot(pC.soundMove);
         }
         else
         {
-            if (pC.angle > pC.closeAngle) { return; }
+            if (pC.Angle >= pC.closeAngle) return;
             // Close pincers
-            pC.angle += Time.deltaTime * pC.speed * 2;
+            pC.Angle += Time.deltaTime * pC.speed * 2;
             foreach (GameObject pincer in pincers)
                 pincer.transform.eulerAngles = new Vector3(0,
-                    pincer.transform.eulerAngles.y, pC.angle);
+                    pincer.transform.eulerAngles.y, pC.Angle);
             if (!pC.audioMove.isPlaying) 
                 pC.audioMove.PlayOneShot(pC.soundMove);
         }
@@ -107,19 +114,19 @@ public class ClawController : MonoBehaviour
         Rb = GetComponent<Rigidbody>();
         playerInput = GameObject.Find("PlayerInputHandler").GetComponent<PlayerInputHandler>();
         if (GameObject.Find("OptionsManager"))
-            if (GameObject.Find("OptionsManager").TryGetComponent<OptionsManager>(out optionsManager))
-            {
-                pH.audioMove.volume = optionsManager.options.volume;
-                pH.audioMove.volume = optionsManager.options.volume;
-                pH.audioMove.volume = optionsManager.options.volume;
+            if (GameObject.Find("OptionsManager").TryGetComponent<OptionsManager>(out optMan))
+            {   // ABSTRACTION EXAMPLE (Persistent user data handled in another class)
+                pH.audioMove.volume = optMan.options.volume;
+                pH.audioMove.volume = optMan.options.volume;
+                pH.audioMove.volume = optMan.options.volume;
             }
         InitValues();
     }
 
     void Update()
     {   // ABSTRACTION EXAMPLE (Raw input handled in another class)
-        Move(playerInput.playerMoveInput3d);
-        if (playerInput.playerButton1isPressed)
+        Move(playerInput.moveInput3d);
+        if (playerInput.button1isPressed)
         {
             Move(true,
                 transform.localPosition.x,
@@ -133,8 +140,7 @@ public class ClawController : MonoBehaviour
                 transform.localPosition.z,
                 arm.transform.localPosition);
         }
-        if (playerInput.playerButton1isPressed ||
-            playerInput.playerButton2isPressed)
+        if (playerInput.button1isPressed || playerInput.button2isPressed)
             Grab(true);
         else
             Grab(false);

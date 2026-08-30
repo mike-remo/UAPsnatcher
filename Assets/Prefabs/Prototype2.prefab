@@ -4641,7 +4641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7847c9d7e701a74f9b72035de818e0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JoystickController
-  maxAngle: 0
+  maxAngle: 20
   button1: {fileID: 2386563341449894843}
   button2: {fileID: 4664432814522893522}
 --- !u!1 &6469148019811479254

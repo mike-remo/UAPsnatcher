@@ -90,9 +90,9 @@ public class MainMenu : MonoBehaviour
 
     public void Update()
     {
-        if (!inOptions) { return; }
+        if (!inOptions) return;
         pollTimer += Time.deltaTime;
-        if (pollTimer < pollNext) { return; }
+        if (pollTimer < pollNext) return;
         videoText.SetText($"Current Video Mode: {GetVideoMode()}");
         pollTimer = 0;
     }
