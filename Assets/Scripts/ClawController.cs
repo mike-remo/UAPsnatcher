@@ -126,7 +126,7 @@ public class ClawController : MonoBehaviour
     void Update()
     {   // ABSTRACTION EXAMPLE (Raw input handled in another class)
         Move(playerInput.moveInput3d);
-        if (playerInput.button1isPressed)
+        if (playerInput.button1Pressed)
         {
             Move(true,
                 transform.localPosition.x,
@@ -140,7 +140,7 @@ public class ClawController : MonoBehaviour
                 transform.localPosition.z,
                 arm.transform.localPosition);
         }
-        if (playerInput.button1isPressed || playerInput.button2isPressed)
+        if (playerInput.button1Pressed || playerInput.button2Pressed)
             Grab(true);
         else
             Grab(false);

@@ -2,6 +2,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -9,8 +13,9 @@ using UnityEditor;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject menuObject1, menuObject2;
-    [SerializeField] private TextMeshProUGUI videoText;
+    [SerializeField] private GameObject menuObject1, menuObject2, initSelect1, initSelect2;
+    private GameObject selectThis;
+    [SerializeField] private TextMeshProUGUI videoModeText, gamepadStatusText;
     private bool inOptions = false;
     private float pollTimer = 0, pollNext = 2;
     private OptionsManager optMan;
@@ -30,6 +35,8 @@ public class MainMenu : MonoBehaviour
         menuObject2.SetActive(true);
         inOptions = true;
         volumeSlider.value = optMan.options.volume;
+        selectThis = initSelect2;
+        EventSystem.current.SetSelectedGameObject(selectThis);
     }
 
     public string GetVideoMode() // Check and return enumerated video mode
@@ -47,6 +54,18 @@ public class MainMenu : MonoBehaviour
             default:
                 return "Unidentified Mode?!";
         }
+    }
+
+    public void PollDetectConfig()
+    {
+        pollTimer += Time.deltaTime;
+        if (pollTimer < pollNext) return;
+        videoModeText.SetText($"Current Video Mode: {GetVideoMode()}");
+        if (Gamepad.current != null)
+            gamepadStatusText.SetText("Gamepad Detected: YES");
+        else
+            gamepadStatusText.SetText("Gamepad Detected: NO");
+        pollTimer = 0;
     }
 
     public void SetVolume() // Attach to slider's (OnValueChanged)
@@ -69,6 +88,8 @@ public class MainMenu : MonoBehaviour
             optMan.SaveData();
             wasChanged = false;
         }
+        selectThis = initSelect1;
+        EventSystem.current.SetSelectedGameObject(selectThis);
     }
 
     public void GameQuit()
@@ -86,14 +107,13 @@ public class MainMenu : MonoBehaviour
         GameObject.Find("MenuAudio").TryGetComponent<AudioSource>(out audio);
         if (audio && optMan)
             audio.volume = optMan.options.volume;
+        selectThis = initSelect1;
     }
 
     public void Update()
     {
-        if (!inOptions) return;
-        pollTimer += Time.deltaTime;
-        if (pollTimer < pollNext) return;
-        videoText.SetText($"Current Video Mode: {GetVideoMode()}");
-        pollTimer = 0;
+        if (inOptions) PollDetectConfig();
+        if (EventSystem.current.currentSelectedGameObject == null)
+            EventSystem.current.SetSelectedGameObject(selectThis);
     }
 } // END
