@@ -3,25 +3,25 @@ using UnityEngine;
 public class JoystickController : MonoBehaviour
 {
     [SerializeField] private GameObject button1, button2;
-    private float maxAngle, btnOffset;
+    private float maxAngle, btnOffset, stickX, stickY, stickZ;
     private Vector3 pushed1, unpushed1, pushed2, unpushed2;
     private PlayerInputHandler playerInput; // From PlayerInputHandler.cs
 
     void Joystick() // Joystick mimics move input
     {
         Vector2 input = playerInput.moveInput;
-        float x = input.x * maxAngle;
-        float y = 90;
-        float z = input.y * maxAngle;
-        transform.localEulerAngles = new Vector3(x, y, z);
+        stickX = input.x * maxAngle;
+        stickY = 90;
+        stickZ = input.y * maxAngle;
+        transform.localEulerAngles = new Vector3(stickX, stickY, stickZ);
     }
 
     void Buttons() // Buttons mimic keypresses
     {
-        if (playerInput.button1isPressed)
+        if (playerInput.button1Pressed)
             button1.transform.localPosition = pushed1;
         else button1.transform.localPosition = unpushed1;
-        if (playerInput.button2isPressed)
+        if (playerInput.button2Pressed)
             button2.transform.localPosition = pushed2;
         else button2.transform.localPosition = unpushed2;
     }
