@@ -1,16 +1,18 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText, gameOverText, timerText;
-    [SerializeField] private GameObject timerUI, gameOverUI;
+    [SerializeField] private GameObject timerUI, gameOverUI, selectThis;
     [SerializeField] private int prizeCount, scoreValue, gameMode;
     private float timerTime;
     private bool isGameOver;
     private AudioSource audio;
     [SerializeField] private AudioClip prizeSound, winSound;
     private OptionsManager optMan;
+    private PauseMenu pauseMenu;
 
     public void PrizeWon(int prizeValue)
     {
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
         gameMode = 1;
         isGameOver = false;
         
+        pauseMenu = GetComponent<PauseMenu>();
         audio = GetComponent<AudioSource>();
         if (GameObject.Find("OptionsManager"))
         {
@@ -71,14 +74,17 @@ public class GameManager : MonoBehaviour
         if (gameMode == 2)
         {
             timerUI.SetActive(true);
-            timerTime = 30;
+            timerTime = 90;
         }
     }
 
     void Update()
     {
-        if (gameMode != 2) return;
-        if (timerTime < 0)
+        if (isGameOver && !pauseMenu.isPaused)
+            if (EventSystem.current.currentSelectedGameObject != selectThis)
+                EventSystem.current.SetSelectedGameObject(selectThis);
+
+        if (gameMode == 2 && timerTime < 0)
         {
             if (!isGameOver) GameOver();
             return;

@@ -7,7 +7,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject gameUI, pauseUI, selectThis;
     private GameObject playerInputObj;
     private PlayerInputHandler playerInput;
-    private bool isPaused;
+    public bool isPaused;
+    
     public void OpenPauseMenu()
     {
         isPaused = true;
@@ -15,6 +16,7 @@ public class PauseMenu : MonoBehaviour
         gameUI.SetActive(false);
         pauseUI.SetActive(true);
         Time.timeScale = 0f;
+        EventSystem.current.SetSelectedGameObject(selectThis);
     }
 
     public void ClosePauseMenu()
