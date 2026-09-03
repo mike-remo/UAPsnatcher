@@ -10,12 +10,14 @@ A claw machine game made by me using Unity engine & editor (v6.5). The purpose o
   
 Source: https://learn.unity.com/pathway/junior-programmer/unit/apply-object-oriented-principles/tutorial/submission-programming-theory-in-action
 
-
 Game details:
+
 NO GenAI used!
 
 Two modes:
+
 Cozy: Enjoy unlimited play time and snatch ALL of the prizes!
+
 Challenge: Try to get as many prizes as you can within the time limit!
 
 Controls:
@@ -23,10 +25,12 @@ Controls:
 - SPACE or NumPad0 to descend and grab.
 - F or NumPadPeriod to release grabbed item.
 - P to Pause game and open menu
+
 Added Gamepad support!
 - LeftStick to move
 - West/North face buttons to grab
 - East/South face buttons to release
 - Start/Select buttons to Pause
+
 
 ![Game Screenshot](https://github.com/mike-remo/UAPsnatcher/blob/main/Screenshots/GameScreen1.png)
