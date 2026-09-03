@@ -43,8 +43,7 @@ public class PauseMenu : MonoBehaviour
         if(!isPaused)
             if (playerInput.button3Pressed)
                 OpenPauseMenu();
-        else
-            if (EventSystem.current.currentSelectedGameObject == null)
-                EventSystem.current.SetSelectedGameObject(selectThis);
+        if (EventSystem.current.currentSelectedGameObject == null)
+            EventSystem.current.SetSelectedGameObject(selectThis);
     }
 } // END

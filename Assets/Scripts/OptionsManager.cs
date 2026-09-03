@@ -6,7 +6,7 @@ public class OptionsManager : MonoBehaviour
     private AudioSource audio;
     private string dataFilename = "/savedata.json";
     private string dataFilepath = Application.dataPath;
-
+    public int gameMode = 1;
     [System.Serializable] public class OptionsData
     {
         public string appName = "UAP_SNATCHER";

@@ -1,11 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-
-
+using TMPro;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -13,9 +11,10 @@ using UnityEditor;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject menuObject1, menuObject2, initSelect1, initSelect2;
+    [SerializeField] private GameObject menuObject1, menuObject2, menuObject3,
+                                        initSelect1, initSelect2, initSelect3;
     private GameObject selectThis;
-    [SerializeField] private TextMeshProUGUI videoModeText, gamepadStatusText;
+    [SerializeField] private TextMeshProUGUI videoModeText, gamepadStatusText, ModeInfoText;
     private bool inOptions = false;
     private float pollTimer = 0, pollNext = 2;
     private OptionsManager optMan;
@@ -26,6 +25,29 @@ public class MainMenu : MonoBehaviour
 
     public void GameStart()
     {
+        menuObject1.SetActive(false);
+        menuObject3.SetActive(true);
+        selectThis = initSelect3;
+        EventSystem.current.SetSelectedGameObject(selectThis);
+    }
+
+    public void GameStartBack()
+    {
+        menuObject3.SetActive(false);
+        menuObject1.SetActive(true);
+        selectThis = initSelect1;
+        EventSystem.current.SetSelectedGameObject(selectThis);
+    }
+
+    public void GameStartMode1()
+    {
+        optMan.gameMode = 1;
+        SceneManager.LoadScene(1);
+    }
+
+    public void GameStartMode2()
+    {
+        optMan.gameMode = 2;
         SceneManager.LoadScene(1);
     }
 
