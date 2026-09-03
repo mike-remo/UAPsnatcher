@@ -10,4 +10,4 @@ public class UISelect : MonoBehaviour, ISelectHandler
     {
         infoText.SetText(textToShow);
     }
-}
+} // ENd

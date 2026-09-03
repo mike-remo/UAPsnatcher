@@ -25,6 +25,13 @@ public class PauseMenu : MonoBehaviour
         playerInputObj.SetActive(true);
         Time.timeScale = 1f;
     }
+
+    public void ReloadScene()
+    {
+        Time.timeScale = 1f;
+        Scene s = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(s.name);
+    }
     public void BackMainMenu()
     {
         Time.timeScale = 1f;
