@@ -1,5 +1,7 @@
 ![Menu Screenshot](https://github.com/mike-remo/UAPsnatcher/blob/main/Screenshots/TitleScreen.png)
 
+![Play the game](https://mike-remo.itch.io/uap-snatcher)
+
 A claw machine game made by me using Unity engine & editor (v6.5). The purpose of this project is to fulfill the final game submission requirements for Unity's Learn Pathway, Junior Programmer, aka "Creating with Code". The requirements for the game are as followed:
 
     A link to your project’s GitHub repo, showing multiple commits with commit messages and at least two branches
@@ -32,5 +34,6 @@ Added Gamepad support!
 - East/South face buttons to release
 - Start/Select buttons to Pause
 
+![Play the game](https://mike-remo.itch.io/uap-snatcher)
 
 ![Game Screenshot](https://github.com/mike-remo/UAPsnatcher/blob/main/Screenshots/GameScreen1.png)
